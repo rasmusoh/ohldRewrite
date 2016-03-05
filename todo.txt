@@ -1,0 +1,13 @@
+TODO: 
+**  fysik"konstanter" redigerbara utan att ladda om, generellt mönster för detta så det är lätt att lägga till fler editables
+
+
+** level cells/ ladda in nya områden dynamiskt
+** quadtrees/spatial hash broad phase collision detection
+** SAT-collision
+** 'edges' som kan utgöra leveln liknande de i Box2D
+** lösa demo mode, separat gamestate eller separat level?
+** 'world' objekt, som inkluderar entityarrayen plus accessors,
+    playerEntity, ev quadTree osv 
+** aktiva och passiva enitities.
+** bara scratchpad-objekt (inga var/return new etc) i mainloopen
