@@ -121,7 +121,7 @@ Collision.checkPolygonCircle = function(polygon, circle, out){
 
 
 
-Collsion.checkCircleCircle = function(A, B, out){
+Collision.checkCircleCircle = function(A, B, out){
     if(Vector.distance(A.pos, B.pos) - (A.r + B.r) > 0){
         out[0] = B.pos[0] - A.pos[0] - Math.sign(B.pos[0] - A.pos[0]) * (A.r + B.r);
         out[1] = B.pos[1] - A.pos[1] - Math.sign(B.pos[1] - A.pos[1]) * (A.r + B.r);
@@ -150,7 +150,7 @@ Collision.checkCircleEdge = function(circle, edge, out){
         Vector.scale(norms[i], minOverlap, out);
     }
 
-    if( currentOverlap < = circle.r){
+    if(currentOverlap <= circle.r){
         //have to check closest vertex as well
         var closest = circle.proj[0] + circle.r < edge.parallellProj[0] ? 0 : 1;
         circle.norm[0] = edge.verteces[closest][0] - circle.center[0];

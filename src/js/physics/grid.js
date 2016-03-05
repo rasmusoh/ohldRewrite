@@ -4,7 +4,7 @@ Grid = function(sizeX, sizeY, cellSize){
 }
 
 Grid.prototype.hash = function(coord){
-    return Math.floor(coord/cellSize);
+    return Math.floor(coord/this.cellSize);
 }
 
 Grid.prototype.insertPoint = function(item, point){
@@ -29,7 +29,7 @@ Grid.prototype.removeItemFromCell = function(item, cell){
         }
     }
     if(removed){
-        array.pop();
+        list.length--;
     }
 }
 
@@ -62,4 +62,9 @@ Grid.prototype.getCellsBox = function(boundingBox, out){
     out.min[1] = this.hash(boundingBox.min[1]);
     out.max[0] = this.hash(boundingBox.max[0]);
     out.max[1] = this.hash(boundingBox.max[1]);
+}
+
+CellsBox = function(){
+    this.min = new Int32Array(2);
+    this.max = new Int32Array(2);
 }

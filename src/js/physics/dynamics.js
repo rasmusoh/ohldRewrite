@@ -1,3 +1,5 @@
+Dyn = {};
+
 Dyn.direction = Vec2.create(); //scratchpad var
 
 Dyn.updateWithGravity = function(velocity, delta){
@@ -6,7 +8,6 @@ Dyn.updateWithGravity = function(velocity, delta){
     }
 }
 
-
 Dyn.accelerateTowardPoint = function(velocity, pos, targetPos, delta, acc, topspeed){
     Vec2.subtract(pos, targetPos, direction);
     Vec2.normalize(direction, direction);
@@ -14,3 +15,7 @@ Dyn.accelerateTowardPoint = function(velocity, pos, targetPos, delta, acc, topsp
     Vec2.add(velocity, direction, velocity);
     Vec2.capAtMax(velocity, topspeed);
 };
+
+//moving body - moving body
+//relativa hastigheter
+//reflektera addera

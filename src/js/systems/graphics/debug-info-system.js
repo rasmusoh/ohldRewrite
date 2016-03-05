@@ -1,23 +1,15 @@
 DebugInfoSystem = (function(){
-    var canvas,
-    ctx,
-    lineCounter,
-    lineHeigth=20,
-    cam,
-    text;
+    var lineHeigth=20;
 
     var update = function(entities, playerEntity, delta){
-        canvas = document.getElementById("gameCanvas");
-        for (i = entities.length-1; i>=0; i--){
-            if (entities[i].c.camera){
-                cam = entities[i].c.camera;
-            };
-        };
-        ctx = canvas.getContext("2d");
+        var canvas = document.getElementById("gameCanvas");
+        var cam = world.cameraEntity;
+
+        var ctx = canvas.getContext("2d");
         ctx.fillStyle = "black";
         ctx.font = "12px Courier New";
 
-        lineCounter = 0;
+        var lineCounter = 0;
 
         writeLine("velocity.x:",playerEntity.c.velocity.x);
         writeLine("velocity.y:",playerEntity.c.velocity.y);

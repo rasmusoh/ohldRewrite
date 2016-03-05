@@ -7,7 +7,7 @@ describe("accelerateTowardPoint", function() {
         var pos = Vec2.create(10,10);
         var targetPos = Vec2.create(-10,10);
 
-        Vector.accelerateTowardPoint(vel, pos, targetPos, delta, acc, topspeed);
+        Dyn.accelerateTowardPoint(vel, pos, targetPos, delta, acc, topspeed);
 
         expectVectorEquals(vel, -116.6, 1.2);
     });
@@ -20,7 +20,7 @@ describe("accelerateTowardPoint", function() {
         var pos = Vec2.create(100,10);
         var targetPos = Vec2.create(100,-100);
 
-        Vector.accelerateTowardPoint(vel, pos, targetPos, delta, acc, topspeed);
+        Dyn.accelerateTowardPoint(vel, pos, targetPos, delta, acc, topspeed);
 
         expectVectorEquals(vel, 0,-100);
     });
@@ -32,7 +32,7 @@ describe("updateWithGravity", function() {
         GRAVITY = 12;
         TERMINAL_VELOCITY = 200;
 
-        Vector.updateWithGravity(vel, 10);
+        Dyn.updateWithGravity(vel, 10);
 
         expect(vel[1]).toEqual(121.2);
     });
@@ -42,7 +42,7 @@ describe("updateWithGravity", function() {
         GRAVITY = 12;
         TERMINAL_VELOCITY = 200;
 
-        Vector.updateWithGravity(vel, 10);
+        Dyn.updateWithGravity(vel, 10);
 
         expect(vel[1]).toEqual(200);
     });

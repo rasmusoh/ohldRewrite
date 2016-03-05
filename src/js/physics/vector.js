@@ -1,6 +1,6 @@
 Vec2 = {};
 
-Vec2.create = (x,y) {
+Vec2.create = function(x,y) {
     return new Float32Array([x, y]);
 }
 

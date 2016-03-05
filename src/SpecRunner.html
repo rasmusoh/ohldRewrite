@@ -1,35 +1,53 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="utf-8">
-  <title>Jasmine Spec Runner v2.4.1</title>
+    <head>
+        <meta charset="utf-8">
+        <title>Jasmine Spec Runner v2.4.1</title>
 
-  <link rel="shortcut icon" type="image/png" href="lib/jasmine-2.4.1/jasmine_favicon.png">
-  <link rel="stylesheet" href="lib/jasmine-2.4.1/jasmine.css">
+        <link rel="shortcut icon" type="image/png" href="lib/jasmine-2.4.1/jasmine_favicon.png">
+        <link rel="stylesheet" href="lib/jasmine-2.4.1/jasmine.css">
 
-  <script src="lib/jasmine-2.4.1/jasmine.js"></script>
-  <script src="lib/jasmine-2.4.1/jasmine-html.js"></script>
-  <script src="lib/jasmine-2.4.1/boot.js"></script>
+        <script src="lib/jasmine-2.4.1/jasmine.js"></script>
+        <script src="lib/jasmine-2.4.1/jasmine-html.js"></script>
+        <script src="lib/jasmine-2.4.1/boot.js"></script>
 
-  <!-- include source files here... -->
-  <script src="js/components.js"></script>
-  <script src="js/constants.js"></script>
-  <script src="js/entities.js"></script>
-  <script src="js/utils/vector.js"></script>
-  <script src="js/utils/collision.js"></script>
-  <script src="js/systems/rocket-system.js"></script>
-  <script src="js/systems/ai-system.js"></script>
-  <script src="js/systems/movement-system.js"></script>
-  <script src="js/systems/collision-system.js"></script>
+        <!-- include source files here... -->
+        <script src="js/core/components.js"></script>
+        <script src="js/core/entities.js"></script>
+        <script src="js/core/world.js"></script>
+        <script src="js/physics/vector.js"></script>
+        <script src="js/physics/shapes/bounding-box.js"></script>
+        <script src="js/physics/shapes/circle.js"></script>
+        <script src="js/physics/shapes/edge.js"></script>
+        <script src="js/physics/shapes/polygon.js"></script>
+        <script src="js/physics/shapes/rigid-body.js"></script>
+        <script src="js/physics/line.js"></script>
+        <script src="js/physics/grid.js"></script>
+        <script src="js/physics/dynamics.js"></script>
+        <script src="js/physics/collision.js"></script>
+        <script src="js/systems/logic/collision-system.js"></script>
+        <script src="js/systems/logic/rocket-system.js"></script>
+        <script src="js/systems/logic/ai-system.js"></script>
+        <script src="js/systems/logic/movement-system.js"></script>
+        <script src="js/constants.js"></script>
 
-  <!-- include spec files here... -->
-  <script src="js/components.spec.js"></script>
-  <script src="js/entities.spec.js"></script>
-  <script src="js/utils/vector.spec.js"></script>
-  <script src="js/utils/collision.spec.js"></script>
+        <!-- include spec files here... -->
+        <script src="js/core/components.spec.js"></script>
+        <script src="js/core/entities.spec.js"></script>
+        <script src="js/core/world.spec.js"></script>
+        <script src="js/physics/vector.spec.js"></script>
+        <script src="js/physics/shapes/circle.spec.js"></script>
+        <script src="js/physics/shapes/edge.spec.js"></script>
+        <script src="js/physics/shapes/line.spec.js"></script>
+        <script src="js/physics/shapes/polygon.spec.js"></script>
+        <script src="js/physics/shapes/rigid-body.spec.js"></script>
+        <script src="js/physics/grid.spec.js"></script>
+        <script src="js/physics/dynamics.spec.js"></script>
+        <script src="js/physics/collision.spec.js"></script>
+        <script src="js/systems/logic/collision-system.spec.js"></script>
 
-</head>
+    </head>
 
-<body>
-</body>
+    <body>
+    </body>
 </html>

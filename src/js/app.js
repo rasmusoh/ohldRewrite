@@ -6,9 +6,9 @@ var Application = (function(){
         last : 0,
         step : 1/60
     };
-    
+
     var timestamp = function() {
-          return window.performance && window.performance.now ? window.performance.now() : new Date().getTime();
+        return window.performance && window.performance.now ? window.performance.now() : new Date().getTime();
     };
 
     var handleKeyPress = function(e){
@@ -34,13 +34,17 @@ var Application = (function(){
         requestAnimationFrame(frame);
     };
 
-    var startGame = function(){
+    var startGame = function(arg){
         document.onkeypress = handleKeyPress;
         document.onmousedown = handleMouseDown;
         document.onmouseup = handleMouseUp;
 
-        GameState.init();
-        currentState = GameState.gotoThis();//should normally be intro/menu state but for testing purposes...
+        switch(arg){
+            case "testLevel":
+                GameState.init();
+                currentState = GameState.gotoThis();//should normally be intro/menu state but for testing purposes...
+                break;
+        };
         requestAnimationFrame(frame);
     };
 

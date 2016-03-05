@@ -1,28 +1,16 @@
 DebugGridSystem = (function(){
-    var canvas,
-    ctx,
-    lineSpacing = 100,
-    xOffset,
-    yOffset,
-    noLinesX,
-    noLinesY,
-    cam,
-    text;
 
-    var update = function(entities, playerEntity, delta){
-        for (var i = entities.length-1; i>=0; i--){
-            if (entities[i].c.camera){
-                cam = entities[i].c.camera;
-            }
-        }
+    var update = function(world, delta){
+        var cam = world.cameraEntity;
+        var lineSpacing = world.grid.cellSize;
 
-        canvas = document.getElementById("gameCanvas");
-        ctx = canvas.getContext('2d');
-        ctx.strokeStyle = "#888888";
-        xOffset = cam.x - cam.x % lineSpacing;
-        yOffset = cam.y - cam.y % lineSpacing;
-        noLinesX = Math.round(canvas.width / lineSpacing) + 2 ;
-        noLinesY = Math.round(canvas.height / lineSpacing) + 2;
+        var canvas = document.getElementById("gameCanvas");
+        var ctx = canvas.getContext('2d');
+        var ctx.strokeStyle = "#888888";
+        var xOffset = cam.x - cam.x % lineSpacing;
+        var yOffset = cam.y - cam.y % lineSpacing;
+        var noLinesX = Math.round(canvas.width / lineSpacing) + 2 ;
+        var noLinesY = Math.round(canvas.height / lineSpacing) + 2;
   
         for (var i = 0; i <= noLinesX; i++ ){
             ctx.beginPath();

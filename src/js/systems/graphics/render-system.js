@@ -1,12 +1,9 @@
 RenderSystem = (function(){
-    var canvas,
-    vec,
-    ctx;
 
     var update = function(entities, playerEntity, delta){
 
-        canvas = document.getElementById('gameCanvas');
-        ctx = canvas.getContext('2d');
+        var canvas = document.getElementById('gameCanvas');
+        var ctx = canvas.getContext('2d');
 
         for (i = entities.length-1; i>=0; i--){
             if (e.c.polygon && e.c.appearance && e.c.position){
@@ -26,7 +23,7 @@ RenderSystem = (function(){
         ctx.beginPath();
         ctx.moveTo(playerEntity.c.position.x, playerEntity.c.position.y);
 
-        vec = new Vector2D(ROCKET_THRUST.x, ROCKET_THRUST.y);
+        vec = Vec2.create(ROCKET_THRUST.x, ROCKET_THRUST.y);
         Vector.rotate(vec, playerEntity.c.position.rotation);
         Vector.scale(vec, 100);
         Vector.add(vec, playerEntity.c.position);

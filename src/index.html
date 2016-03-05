@@ -8,28 +8,37 @@
         </canvas>
         <div ui-view> test </div>
 
+        <script src="js/core/components.js"></script>
+        <script src="js/core/entities.js"></script>
+        <script src="js/core/world.js"></script>
+        <script src="js/physics/vector.js"></script>
+        <script src="js/physics/shapes/bounding-box.js"></script>
+        <script src="js/physics/shapes/circle.js"></script>
+        <script src="js/physics/shapes/edge.js"></script>
+        <script src="js/physics/shapes/polygon.js"></script>
+        <script src="js/physics/shapes/rigid-body.js"></script>
+        <script src="js/physics/line.js"></script>
+        <script src="js/physics/grid.js"></script>
+        <script src="js/physics/dynamics.js"></script>
+        <script src="js/physics/collision.js"></script>
+        <script src="js/systems/logic/collision-system.js"></script>
+        <script src="js/systems/logic/rocket-system.js"></script>
+        <script src="js/systems/logic/ai-system.js"></script>
+        <script src="js/systems/logic/movement-system.js"></script>
+        <script src="js/systems/graphics/camera-system.js"></script>
+        <script src="js/systems/graphics/render-system.js"></script>
+        <script src="js/systems/graphics/debug-info-system.js"></script>
+        <script src="js/systems/graphics/debug-grid-system.js"></script>
+        <script src="js/game-states/design-state.js"></script>
+        <script src="js/game-states/pause-state.js"></script>
+        <script src="js/game-states/menu-state.js"></script>
+        <script src="js/game-states/game-state.js"></script>
         <script src="js/constants.js"></script>
-        <script src="js/utils/vector.js"></script>
-        <script src="js/utils/collision.js"></script>
         <script src="js/utils/keycodes.js"></script>
-        <script src="js/entities.js"></script>
-        <script src="js/components.js"></script>
         <script src="js/level-manager.js"></script>
-        <script src="js/systems/rocket-system.js"></script>
-        <script src="js/systems/ai-system.js"></script>
-        <script src="js/systems/movement-system.js"></script>
-        <script src="js/systems/collision-system.js"></script>
-        <script src="js/systems/camera-system.js"></script>
-        <script src="js/systems/render-system.js"></script>
-        <script src="js/systems/debug-info-system.js"></script>
-        <script src="js/systems/debug-grid-system.js"></script>
-        <script src = "js/game-states/design-state.js"></script>
-        <script src = "js/game-states/pause-state.js"></script>
-        <script src = "js/game-states/menu-state.js"></script>
-        <script src = "js/game-states/game-state.js"></script>
-        <script src = "js/app.js"></script>
+        <script src="js/app.js"></script>
         <script>
-            Application.startGame();
+            Application.startGame("testLevel");
         </script>
     </body>
 </html>
