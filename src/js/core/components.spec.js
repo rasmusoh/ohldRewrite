@@ -33,40 +33,6 @@ describe("position", function() {
     });
 });
 
-describe("polygon", function() {
-    it("should instatiate correctly", function() {
-        var v = [ 
-        {x:0,y:0},
-        {x:100,y:0},
-        {x:150,y:-50},
-        {x:100,y:-100},
-        {x:0,y:-100}
-        ];
-
-        var pol = new PolygonComponent(v);
-        expect(
-                pol.verteces[1].x === 100 &&
-                pol.verteces[4].y === -100).toBeTruthy(); 
-    });
-});
-
-describe("circle", function() {
-    it("should instatiate correctly", function() {
-        var circle = new circleComponent(100);
-        expect(
-                circle.r === 100).toBeTruthy(); 
-    });
-});
-
-describe("aabb", function() {
-    it("should instatiate correctly", function() {
-        var c = new aabbComponent(200, 300);
-        expect(
-                c.w === 200 &&
-                c.h === 300).toBeTruthy(); 
-    });
-});
-
 describe("rocket", function() {
     it("should instatiate correctly", function() {
         var c = new rocketComponent(ROCKET_STATE.ROCKETUP);

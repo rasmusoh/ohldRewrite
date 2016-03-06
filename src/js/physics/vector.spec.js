@@ -1,11 +1,10 @@
-describe("create", function(){
+describe("Vec2", function(){
 
     it("create should create an Float32Array with x and y at first and second position", function(){
         var result = Vec2.create(1.5, 2.7);
 
-        expect(result[0] === 1.5 
-              && result[1] === 2.7
-              && result.length === 1).toBeTruthy();
+        expectVec2Equals(result, 1.5, 2.7);
+        expect(result.length).toEqual(2);
     });
     
     it(" add should add the second vector to the first", function() {
@@ -15,7 +14,7 @@ describe("create", function(){
 
         Vec2.add(vector1, vector2, out);
 
-        expectVec2Equals(out, 3, 4);
+        expectVec2Equals(out, 4, 6);
     });
 
     it("subtract should subtract the second vector from the first", function() {
@@ -51,10 +50,19 @@ describe("create", function(){
         var expectedSideLength = 1/Math.sqrt(2);
         var out = Vec2.create(0,0);
 
-        Vec2.normalize(vector);
+        Vec2.normalize(vector, out);
 
         expectVec2Equals(out, expectedSideLength, -expectedSideLength);
        
+    });
+
+    it("dot should return dot product of vectors", function(){
+        var vector1 = Vec2.create(2,-3);
+        var vector2 = Vec2.create(5, 7);
+
+        var result = Vec2.dot(vector1, vector2);
+
+        expect(result).toEqual(-11);     
     });
 
     it("rotate should rotate vector with angle", function() {
@@ -75,17 +83,6 @@ describe("create", function(){
         expectVec2Equals(vector1, -6, 3);
     });
 
-    it("addScaled should add the second vector, scaled, to the first", function(){
-        var vector1 = Vec2.create(2,1);
-        var vector2 = Vec2.create(1,4);
-        var out = Vec2.create(0,0);
-
-        Vec2.addScaled(vector1, vector2, 2);
-
-        expectVec2Equals(vector1, 4, 9);
-        expectVec2Equals(vector2, 1, 4);
-    });
-
     it("capAtMax should rescale vector to max length if longer", function(){
         var vector = Vec2.create(6,8);
         var out = Vec2.create(0,0);
@@ -104,39 +101,27 @@ describe("create", function(){
         expectVec2Equals(vector, 3, 3);
     });
     
-    it("rotateInDirection should rotate forward for vector(1,0)", function (){
+    it("angle should return angle for vector(1,0)", function (){
         var direction = Vec2.create(1,0);
-        var position = new positionComponent(0,0,5);
-        var out = Vec2.create(0,0);
 
-        Vec2.rotateInDirection(position, direction);
+        var result = Vec2.angle(direction);
 
-        expect(Math.round(position.rotation),5).toEqual(0);
+        expect(round(result,3)).toEqual(0);
     });
 
-    it("rotateInDirection should rotate downward for vector(0,-1)", function (){
+    it("angle should return angle for vector(0,-1)", function (){
         var direction = Vec2.create(0,-1);
-        var position = new positionComponent(0,0,5);
-        var out = Vec2.create(0,0);
 
-        Vec2.rotateInDirection(position, direction);
+        var result = Vec2.angle(direction);
 
-        expect(position.rotation).toEqual(-Math.PI/2);
+        expect(round(result,3)).toEqual(round(-Math.PI/2, 3));
     });
 
-    it("rotateInDirection should rotate for vector(2,2) correctly", function (){
+    it("angle should return angle for vector(2,2)", function (){
         var direction  = Vec2.create(2,2);
-        var position = new positionComponent(0,0,5);
-        var out = Vec2.create(0,0);
 
-        Vec2.rotateInDirection(position, direction);
+        var result = Vec2.angle(direction);
 
-        expect(position.rotation).toEqual(Math.PI/4);
+        expect(round(result,3)).toEqual(round(Math.PI/4, 3));
     });
 }); 
-
-expectVec2Equals = function(vector, expectedX, expectedY){
-        expect(Math.round(vector[0]*1000)/1000).toEqual(expectedX);
-        expect(Math.round(vector[1]*1000)/1000).toEqual(expectedY);
-};
-

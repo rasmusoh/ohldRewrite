@@ -28,14 +28,18 @@ Vec2.scale = function(a, k, out){
 }
 
 Vec2.dot = function(a, b){
-    return a[0] * a[0] + a[1] * a[1];
+    return a[0] * b[0] + a[1] * b[1];
 }
 
 Vec2.length = function(a){
     return Math.sqrt(a[0] * a[0] + a[1] * a[1]);
 }
 
-Vec2.normalize = function(a){
+Vec2.angle = function(a){
+    return Math.atan2(a[1], a[0]);
+};
+
+Vec2.normalize = function(a, out){
     var iLen  = 1 / Vec2.length(a);
     out[0] = a[0] * iLen;
     out[1] = a[1] * iLen;
@@ -46,14 +50,10 @@ Vec2.rotate = function(a, angle, out){
     var sinAngle = Math.sin(angle);
 
     var aX = a[0]; //this step is needed in case a = out
-    var aY = a[0]; //this step is needed in case a = out
+    var aY = a[1]; //this step is needed in case a = out
     out[0] = aX * cosAngle - aY * sinAngle;
     out[1] = aY * cosAngle + aX * sinAngle;
 }
-
-Vec2.rotateInDirection = function(position, dirc){
-    position.rotation = Math.atan2(dirc[0], dirc[1]);
-};
 
 //scales and rotates the second vector, then adds it to the first
 Vec2.addTransformed = function(a, b, angle, scale){
@@ -67,6 +67,6 @@ Vec2.addTransformed = function(a, b, angle, scale){
 Vec2.capAtMax = function(vector, max){
     var len = Vec2.length(vector);
     if(len > max){
-        scale(vector, max / len);
+        Vec2.scale(vector, max / len, vector);
     }
 };

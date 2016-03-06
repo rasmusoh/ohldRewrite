@@ -20,12 +20,11 @@ describe("RigidBody", function(){
 
     it("update should transform polygon", function(){
         var verteces = [
-        {x:-1, y: 1},
-        {x: 1, y: 1},
-        {x: 2, y: 0},
-        {x: 1, y:-1},
-        {x:-1, y:-1}
-        ];
+            [-1, 1],
+            [ 1, 1],
+            [ 2, 0],
+            [ 1,-1],
+            [-1,-1]];
         var polygon = new Polygon(verteces);
         var rigidBody = new RigidBody(ShapeEnum.POLYGON, polygon);
         var translation = Vec2.create(5,6);
@@ -33,23 +32,21 @@ describe("RigidBody", function(){
         rigidBody.update(translation, 0);
 
         var expected = [
-        {x: 4, y: 7},
-        {x: 6, y: 7},
-        {x: 7, y: 6},
-        {x: 6, y: 5},
-        {x: 4, y: 5}
-        ];
-        expectPolygonEquals(this.testPolygon.verteces, expected);
+            [ 4, 7],
+            [ 6, 7],
+            [ 7, 6],
+            [ 6, 5],
+            [ 4, 5]];
+        expectPolygonEquals(rigidBody.body.verteces, expected);
     });
 
     it("update should should update the bounding box (polygon)", function(){
         var verteces = [
-        {x:-1, y: 1},
-        {x: 1, y: 1},
-        {x: 2, y: 0},
-        {x: 1, y:-1},
-        {x:-1, y:-1}
-        ];
+            [-1, 1],
+            [ 1, 1],
+            [ 2, 0],
+            [ 1,-1],
+            [-1,-1]];
         var polygon = new Polygon(verteces);
         var rigidBody = new RigidBody(ShapeEnum.POLYGON, polygon);
         var translation = Vec2.create(5,6);
@@ -63,8 +60,8 @@ describe("RigidBody", function(){
     it("constructor should create and set bounding box", function(){
         var rigidBody = new RigidBody(ShapeEnum.EDGE, CreateTestEdge());
 
-        expectVec2Equals(rigidBody.min, 0, 0);
-        expectVec2Equals(rigidBody.max, 200, 200);
+        expectVec2Equals(rigidBody.box.min, 0, 0);
+        expectVec2Equals(rigidBody.box.max, 200, 200);
     });
 
 });

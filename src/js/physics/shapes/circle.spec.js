@@ -6,24 +6,16 @@ describe("Circle", function(){
 
         circle.project(unitVector);
         
-        expectLineEquals(circel.proj, -35.355, 35.355);
+        expectLineEquals(circle.proj, -50, 50);
     });
 
     it("project should project onto unit vector 2", function(){
-        CreateTestCircle(100,200);
+        var circle = CreateTestCircle(100,200);
         var unitVector = Vec2.create(1,-1);
         Vec2.normalize(unitVector, unitVector);
 
         circle.project(unitVector);
 
-        expectLineEquals(circel.proj, -35.355 - 70.7107, 35.355 - 70.7107);
+        expectLineEquals(circle.proj, -50 - 70.7107, 50 - 70.7107);
     });
 });
-
-CreateTestCircle = function(x,y){
-   return new Circle(50, x, y);
-}
-
-CreateTestCircleBig = function(x, y){
-    return new Circle(100, x, y);
-}

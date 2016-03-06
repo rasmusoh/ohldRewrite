@@ -72,7 +72,7 @@ describe("Polygon", function(){
         expectPolygonEquals(this.testPolygon.verteces, expected);
     });
 
-    it("setNorms should set polygon norms", function() {
+    it("setNorms should set polygon norms 1", function() {
         var verteces = [
         {x:-1, y: 1},
         {x: 1, y: 1},
@@ -91,10 +91,10 @@ describe("Polygon", function(){
         {x: 0.707, y:-0.707},
         {x: 0, y:-1},
         ];
-        expectPolygonEquals(testPolygon.norms, expected);
+        expectPolygonEquals(this.testPolygon.norms, expected);
     });
 
-    it("should set polygon norms", function() {
+    it("should set polygon norms 2", function() {
         var verteces = [
         {x: 4, y: 5},
         {x: 4, y: 7},
@@ -113,13 +113,13 @@ describe("Polygon", function(){
         {x: 0.707, y: 0.707},
         {x: 1, y: 0},
         ];
-        expectPolygonEquals(testPolygon.norms, expected);
+        expectPolygonEquals(this.testPolygon.norms, expected);
     });
 
     it("project should project onto unit vector (x-axis)", function(){
         var pol = CreateTestPolygonPentagon(0,0);
 
-        pol.project(Vec2.xAsis);
+        pol.project(Vec2.xAxis);
 
         expectLineEquals(pol.proj, -125, 150);
     });
@@ -149,33 +149,6 @@ describe("Polygon", function(){
 
         pol.project(unitVector);
 
-        expectLineEquals(pol.proj, -70.7107, 42.4264);
+        expectLineEquals(pol.proj, -70.7107, 70.7107);
     });
 });
-
-expectPolygonEquals = function(verteces, expected){
-    for(i = expected.length -1; i >=0; i--){
-        expect(Math.round(verteces[i][0]*1000)/1000 === expected[i][0] &&
-                Math.round(verteces[i][1]*1000)/1000 === expected[i][1]).toBeTruthy();
-    }
-};
-
-CreateTestPolygonPentagon = function(x, y){
-    var verteces = new Array(3);
-    verteceses[0] = Vec2.create(-125,-50);
-    verteceses[1] = vec2.create(-125,50);
-    verteceses[2] = vec2.create(100,50);
-    verteceses[4] = vec2.create(150,0);
-    verteceses[3] = vec2.create(100,-50);
-
-    return new Polygon(verteces, x, y, 0);
-}
-
-CreateTestPolygonTriangle = function(x,y){
-    var verteces = new Array(3);
-    verteceses[0] = Vec2.create(-20,80);
-    verteceses[1] = Vec2.create(-80,-20);
-    verteceses[2] = Vec2.create(-20,-20);
-
-    return new Polygon(verteces, x, y, 0);
-}

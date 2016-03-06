@@ -1,6 +1,6 @@
 describe("Edge", function(){ 
     it("constructor should set norms and projections", function(){
-        var edge = new Edge(200,100,400,300, true);
+        var edge = new Edge(200,100,400,300, false);
 
         expectVec2Equals(edge.norm, -Math.sqrt(1/2), Math.sqrt(1/2));
         expectVec2Equals(edge.parallellNorm, Math.sqrt(1/2), Math.sqrt(1/2));

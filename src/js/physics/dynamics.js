@@ -19,3 +19,4 @@ Dyn.accelerateTowardPoint = function(velocity, pos, targetPos, delta, acc, topsp
 //moving body - moving body
 //relativa hastigheter
 //reflektera addera
+Dyn

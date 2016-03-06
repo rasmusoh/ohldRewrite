@@ -5,10 +5,10 @@ Line.create = function(a, b){
 }
 //checks overlap between segments a and b
 Line.isOverlap = function(a, b){
-    return (a[0] > b[1]) && (b[0] < a[1]);
+    return (a[0] < b[1]) && (b[0] < a[1]);
 }
 
 //returns overlap between segments a and b
 Line.overlap = function(a, b){
-    return Math.max(a[0], b[0]) - Math.min(a[1], b[1]);
+    return Math.min(a[1], b[1]) - Math.max(a[0], b[0]);
 }
