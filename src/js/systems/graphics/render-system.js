@@ -5,7 +5,7 @@ RenderSystem = (function(){
         var canvas = document.getElementById('gameCanvas');
         var ctx = canvas.getContext('2d');
 
-        for (i = entities.length-1; i>=0; i--){
+        for( var i = entities.length-1; i>=0; i--){
             if (e.c.polygon && e.c.appearance && e.c.position){
             renderPolygon(e, ctx);
             }

@@ -12,7 +12,8 @@ expectPolygonEquals = function(verteces, expected){
 
 round = function(number, decimals){
     var factor = Math.pow(10, decimals);
-    return Math.round(number*factor)/factor;
+    var rounded = Math.round(number*factor)/factor;
+    return rounded === -0 ? 0 : rounded;
 }
 
 expectLineEquals = function(line, expectedX, expectedY){

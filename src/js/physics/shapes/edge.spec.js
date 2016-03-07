@@ -3,6 +3,7 @@ describe("Edge", function(){
         var edge = new Edge(200,100,400,300, false);
 
         expectVec2Equals(edge.norm, -Math.sqrt(1/2), Math.sqrt(1/2));
+        expectLineEquals(edge.normProj, -Infinity, -100*Math.sqrt(1/2));
         expectVec2Equals(edge.parallellNorm, Math.sqrt(1/2), Math.sqrt(1/2));
         expectLineEquals(edge.parallellProj, 212.132, 494.9747);
     });
@@ -45,5 +46,5 @@ CreateTestEdge = function(){
 }
 
 CreateTestEdgeUpsideDown = function(){
-    return new edge(0,200,200,0, true);
+    return new Edge(0,200,200,0, true);
 }

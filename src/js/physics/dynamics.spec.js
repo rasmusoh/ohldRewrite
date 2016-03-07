@@ -9,7 +9,7 @@ describe("accelerateTowardPoint", function() {
 
         Dyn.accelerateTowardPoint(vel, pos, targetPos, delta, acc, topspeed);
 
-        expectVectorEquals(vel, -116.6, 1.2);
+        expectVec2Equals(vel, -116.6, 1.2);
     });
 
     it("should not go above terminal velocity", function() {
@@ -22,28 +22,28 @@ describe("accelerateTowardPoint", function() {
 
         Dyn.accelerateTowardPoint(vel, pos, targetPos, delta, acc, topspeed);
 
-        expectVectorEquals(vel, 0,-100);
+        expectVec2Equals(vel, 0,-100);
     });
 });
 
 describe("updateWithGravity", function() {
     it("should update velocity with gravity", function() {
-        var vel = new velocityComponent(3.4, 1.2, 0);
+        var vel = new Vec2.create(3.4, 1.2, 0);
         GRAVITY = 12;
         TERMINAL_VELOCITY = 200;
 
         Dyn.updateWithGravity(vel, 10);
 
-        expect(vel[1]).toEqual(121.2);
+        expectVec2Equals(vel, 3.4, 121.2);
     });
 
     it("should not go above terminal velocity", function() {
-        var vel = new velocityComponent(3.4, 200, 0);
+        var vel = new Vec2.create(3.4, 200, 0);
         GRAVITY = 12;
         TERMINAL_VELOCITY = 200;
 
         Dyn.updateWithGravity(vel, 10);
 
-        expect(vel[1]).toEqual(200);
+        expectVec2Equals(vel, 3.4, 200);
     });
 });

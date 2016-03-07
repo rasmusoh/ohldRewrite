@@ -208,6 +208,6 @@ describe("checkCircleEdge", function(){
 
         var result = Collision.checkCircleEdge(circle,edge,out);
 
-        expect(result).toEqual(true);
+        expect(result).toEqual(false);
     });
 });

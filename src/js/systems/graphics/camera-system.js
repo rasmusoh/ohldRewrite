@@ -2,7 +2,7 @@ CameraSystem = (function(){
     var cam;
 
     update = function(entities, playerEntity, delta){
-        for (i = entities.length-1; i>=0; i--){
+        for( var i = entities.length-1; i>=0; i--){
             if (entities[i].c.camera){
                 cam = entities[i].c.camera;
             };

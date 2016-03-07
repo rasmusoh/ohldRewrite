@@ -38,9 +38,17 @@ describe("Vec2", function(){
 
     it("length should return the length of the vector", function() {
         var vector1 = Vec2.create(3,4);
-        var out = Vec2.create(0,0);
 
         var result = Vec2.length(vector1);
+
+        expect(result).toEqual(5);
+    });
+
+    it("distance should return the distance  between the two vectors", function() {
+        var vector1 = Vec2.create(1,2);
+        var vector2 = Vec2.create(-2,-2);
+
+        var result = Vec2.distance(vector1, vector2);
 
         expect(result).toEqual(5);
     });

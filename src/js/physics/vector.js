@@ -35,6 +35,10 @@ Vec2.length = function(a){
     return Math.sqrt(a[0] * a[0] + a[1] * a[1]);
 }
 
+Vec2.distance = function(a, b){
+    return Math.sqrt(Math.pow(b[0] - a[0], 2) + Math.pow(b[1] - a[1], 2));
+}
+
 Vec2.angle = function(a){
     return Math.atan2(a[1], a[0]);
 };

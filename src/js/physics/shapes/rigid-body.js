@@ -7,13 +7,20 @@ ShapeEnum = {
 //object that holds a body (circle, polygon or edge), its axis-aligned bounding box
 //collision flag and collision vector
 RigidBody = function(type, body){
-    this.box = new BoundingBox(0, 0, 0, 0);
     this.type = type;
     this.body = body;
     this.haveCollided = false;
     this.collisionVector = Vec2.create();
-    this.point = Vec2.create();
-    this.updateBox();
+    this.collisionPoint = Vec2.create();
+    this.box = new BoundingBox(0, 0, 0, 0);
+    if( this.type === ShapeEnum.EDGE ){
+        this.box.min[0] = Math.min(body.verteces[0][0], body.verteces[1][0]);
+        this.box.min[1] = Math.min(body.verteces[0][1], body.verteces[1][1]);
+        this.box.max[0] = Math.max(body.verteces[0][0], body.verteces[1][0]);
+        this.box.max[1] = Math.max(body.verteces[0][1], body.verteces[1][1]);
+    } else {
+        this.updateBox();
+    }
 }
 
 RigidBody.prototype.update = function(position, rotation){

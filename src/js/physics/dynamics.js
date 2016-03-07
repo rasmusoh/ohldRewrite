@@ -9,14 +9,13 @@ Dyn.updateWithGravity = function(velocity, delta){
 }
 
 Dyn.accelerateTowardPoint = function(velocity, pos, targetPos, delta, acc, topspeed){
-    Vec2.subtract(pos, targetPos, direction);
-    Vec2.normalize(direction, direction);
-    Vec2.scale(direction, acc*delta);
-    Vec2.add(velocity, direction, velocity);
+    Vec2.subtract(targetPos, pos, Dyn.direction);
+    Vec2.normalize(Dyn.direction, Dyn.direction);
+    Vec2.scale(Dyn.direction, acc*delta, Dyn.direction);
+    Vec2.add(velocity, Dyn.direction, velocity);
     Vec2.capAtMax(velocity, topspeed);
 };
 
 //moving body - moving body
 //relativa hastigheter
 //reflektera addera
-Dyn

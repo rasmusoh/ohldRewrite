@@ -9,12 +9,14 @@ Edge = function(x1, y1, x2, y2, downFacing){
     if(downFacing){
         Vec2.scale(this.norm, -1, this.norm);
     }
-
     this.proj = Line.create(0,0);
-    this.parallellNorm = Vec2.create(); 
+
+    this.project(this.norm);
+    this.normProj = Line.create(this.proj[0], this.proj[1]);
+
+    this.parallellNorm = Vec2.create(0,0);
     Vec2.subtract(this.verteces[1], this.verteces[0], this.parallellNorm);
     Vec2.normalize(this.parallellNorm, this.parallellNorm);
-
     this.project(this.parallellNorm);
     this.parallellProj = Line.create(this.proj[0], this.proj[1]);
 

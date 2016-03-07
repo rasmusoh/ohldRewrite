@@ -20,7 +20,7 @@ Grid.prototype.removePoint = function(item, point){
 //index switching in order to garbage friendly, finns bara en jord
 Grid.prototype.removeItemFromCell = function(item, cell){
     removed = false;
-    for (i = 0; i < list.length; i++){
+    for( var i = 0; i < list.length; i++){
         if(removed){
             list[i-1] = list[i];
         }
@@ -38,7 +38,7 @@ Grid.prototype.insertBox = function(item, boundingBox){
     var minY = this.hash(boundingBox.min[1]);
     var maxX = this.hash(boundingBox.min[0]);
     var maxY = this.hash(boundingBox.min[1]);
-    for (i = minX; i <= maxX; i++){
+    for( var i = minX; i <= maxX; i++){
         for(j = minY; j <= maxY; j++){
             this.contents[i][j].push(item);
         }
@@ -50,7 +50,7 @@ Grid.prototype.removeBox = function(item, boundingBox){
     var minY = this.hash(boundingBox.min[1]);
     var maxX = this.hash(boundingBox.min[0]);
     var maxY = this.hash(boundingBox.min[1]);
-    for (i = minX; i <= maxX; i++){
+    for( var i = minX; i <= maxX; i++){
         for(j = minY; j <= maxY; j++){
             removeItemFromCell(item, this.contents[i][j]);
         }
