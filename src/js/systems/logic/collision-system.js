@@ -7,7 +7,7 @@ CollisionSystem = (function(){
         moving.sort();
 
         for(i = 0; i < moving.length; i++){
-            moving.update();
+            moving[i].update();
             
             //check against moving bodies (sort and sweep)
             for(j = i + 1; j < moving.length; j++){

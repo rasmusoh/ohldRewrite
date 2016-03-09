@@ -1,22 +1,79 @@
 describe("checkBoundingBox", function(){ 
-    it("should return false when not colliding", function(){
+    it("should return false when not colliding 1", function(){
+        var a = new BoundingBox(50,50, 100, 200);
+        var b = new BoundingBox(0,30, 40, 300);
+
+        var result = Collision.checkBoundingBox(a, b);
+
+        expect(result).toBeFalsy();
     });
-    it("should return true  when colliding", function(){
+
+    it("should return false when not colliding 2", function(){
+        var a = new BoundingBox(20,20, 40, 40);
+        var b = new BoundingBox(0, 0, 10, 10);
+
+        var result = Collision.checkBoundingBox(a, b);
+
+        expect(result).toBeFalsy();
+    });
+
+    it("should return true  when colliding 1", function(){
+        var a = new BoundingBox(50,50, 100, 200);
+        var b = new BoundingBox(0,50, 60, 300);
+
+        var result = Collision.checkBoundingBox(a, b);
+
+        expect(result).toBeTruthy();
+    });
+
+    it("should return true  when colliding 2", function(){
+        var a = new BoundingBox(20,20, 40, 40);
+        var b = new BoundingBox(25, 25, 30, 30);
+
+        var result = Collision.checkBoundingBox(a, b);
+
+        expect(result).toBeTruthy();
     });
 });
 
 describe("checkBodies", function(){ 
-    it("should return set collisionvector of rigidbody when colliding", function(){
-    });
-    it("should return set collisionvector of rigidbody when colliding(flip collision vector)", function(){
-    });
-});
+    it("should return set collisionvector of rigidbody when colliding 1", function(){
+        var a = new RigidBody(ShapeEnum.POLYGON, CreateTestPolygonPentagon(0, -10));
+        var b = new RigidBody(ShapeEnum.POLYGON, CreateTestPolygonTriangle(130, 40));
 
-describe("checkBodyStatic", function(){ 
-    it("should return set collisionvector of rigidbody when colliding", function(){
+        var result = Collision.checkBodies(a,b);
+
+        expect(result).toEqual(true);
+        expectVec2Equals(a.collisionVector, 5, 5);
     });
 
-    it("should return set collisionvector of rigidbody when colliding(flip collision vector)", function(){
+    it("should return set collisionvector of rigidbody when colliding 2", function(){
+        var a = new RigidBody(ShapeEnum.POLYGON, CreateTestPolygonPentagon(-110,230));
+        var b = new RigidBody(ShapeEnum.EDGE, CreateTestEdgeUpsideDown());
+
+        var result = Collision.checkBodies(a,b);
+
+        expect(result).toEqual(true);
+        expectVec2Equals(a.collisionVector, 5, -5);
+    });
+
+    it("should return set collisionvector of rigidbody when colliding 3(flip collision vector)", function(){
+        var a = new RigidBody(ShapeEnum.CIRCLE, CreateTestCircle(-180, 0));
+        var b = new RigidBody(ShapeEnum.POLYGON, CreateTestPolygonPentagon(-10, 0));
+
+        var result = Collision.checkBodies(a,b);
+
+        expect(result).toEqual(true);
+        expectVec2Equals(a.collisionVector, 5, 0);
+    });
+
+    it("should return false when not colliding", function(){
+        var a = new RigidBody(ShapeEnum.CIRCLE, CreateTestCircle(-280, 0));
+        var b = new RigidBody(ShapeEnum.POLYGON, CreateTestPolygonPentagon(-10, 0));
+
+        var result = Collision.checkBodies(a,b);
+
+        expect(result).toEqual(false);
     });
 });
 

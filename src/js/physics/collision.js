@@ -5,52 +5,33 @@
 Collision = {};
 
 Collision.checkBoundingBox = function(A,B){
-    return A.min[0] > B.max[1] && B.min[0] > A.max[0] 
-        && A.min[1] > B.max[1] && B.min[1] > A.max[1];
+    return A.min[0] < B.max[0] && B.min[0] < A.max[0] 
+        && A.min[1] < B.max[1] && B.min[1] < A.max[1];
 }
 
 Collision.checkBodies = function(A, B, out){
     var result;
-    if (A.type === shapeEnum.CIRCLE){
-        if (B.type === shapeEnum.CIRCLE){
-            result = Collision.checkCircleCircle(A.body, B.body, A.collisionVector);
-        } else {
-            result = Collision.checkPolygonCircle(B.body, A.body, A.collisionVector); 
-            Vec2.scale(A.collisionVector, -1, A.collisionVector); //get passed in opposite order, so we need to flip collision vector
-        }
-    } else {
-        if (B.type === shapeEnum.CIRCLE){
-            result = Collision.checkPolygonCircle(A.body, B.body, A.collisionVector);
-        } else {
-            result = Collision.checkPolygonPolygon(A.body, B.body, A.collisionVector);
-        }
-    }
-    return result;
-}
-
-Collision.checkBodyStatic = function(A, B, out){
-    var result;
     switch(B.type){
-        case shapeEnum.CIRCLE:
-            if (A.type === shapeEnum.CIRCLE){
+        case ShapeEnum.CIRCLE:
+            if (A.type === ShapeEnum.CIRCLE){
                 result = Collision.checkCircleCircle(A.body, B.body, A.collisionVector);
             } else {
                 result = Collision.checkPolygonCircle(A.body, B.body, A.collisionVector); 
             }
             break;
-        case shapeEnum.POLYGON:
-            if (A.type === shapeEnum.CIRCLE){
+        case ShapeEnum.POLYGON:
+            if (A.type === ShapeEnum.CIRCLE){
                 result = Collision.checkPolygonCircle(B.body, A.body, A.collisionVector); 
                 Vec2.scale(A.collisionVector, -1, A.collisionVector); //get passed in opposite order, so we need to flip collision vector
             } else {
                 result = Collision.checkPolygonPolygon(A.body, B.body, A.collisionVector); 
             }
             break;
-        case shapeEnum.EDGE:
-            if (A.type === shapeEnum.CIRCLE){
+        case ShapeEnum.EDGE:
+            if (A.type === ShapeEnum.CIRCLE){
                 result = Collision.checkCircleEdge(A.body, B.body, A.collisionVector);
             } else {
-                result = Collision.checkPolygonEdge(B.body, A.body, A.collisionVector); 
+                result = Collision.checkPolygonEdge(A.body, B.body, A.collisionVector); 
             }
             break;
     }

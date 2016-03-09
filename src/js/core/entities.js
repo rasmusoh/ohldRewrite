@@ -1,21 +1,21 @@
-entity = function(){
-	this.id = entity.prototype.count;
+Entity = function(){
+	this.id = Entity.prototype.count;
 
-	entity.prototype.count++;
+	Entity.prototype.count++;
 
 	this.c = {};
 
 	return this;
 };
 
-entity.prototype.count = 0;
+Entity.prototype.count = 0;
 
-entity.prototype.addComponent = function addComponent ( component ){
+Entity.prototype.addComponent = function addComponent ( component ){
 	this.c[component.name] = component;
 	return this;
 };
 
-entity.prototype.removeComponent = function removeComponent ( componentName ){
+Entity.prototype.removeComponent = function removeComponent ( componentName ){
 	var name = componentName;
 	
 	if(typeof componentName === 'function'){
@@ -26,7 +26,7 @@ entity.prototype.removeComponent = function removeComponent ( componentName ){
 	return this;
 };
 
-entity.prototype.print = function print () {
+Entity.prototype.print = function print () {
 	console.log(JSON.stringify(this, null, 4));
 	return this;
 };

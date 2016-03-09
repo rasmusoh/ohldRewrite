@@ -1,6 +1,12 @@
 Grid = function(sizeX, sizeY, cellSize){
     this.cellSize = cellSize;
-    this.contents = new Array();
+    this.contents = new Array(this.hash(sizeX));
+    for( var i = 0; i < this.contents.length; i++){
+        this.contents[i] = new Array(this.hash(sizeY));
+        for( var j = 0; j < this.contents[i].length; j++){
+            this.contents[i][j] = [];
+        }
+    }
 }
 
 Grid.prototype.hash = function(coord){
@@ -11,20 +17,20 @@ Grid.prototype.insertPoint = function(item, point){
     this.contents[this.hash(point[0])][this.hash(point[1])].push(item);
 }
 
-Grid.prototype.removePoint = function(item, point){
+Grid.prototype.removePoint = function(id, point){
     var list = this.contents[this.hash(point[0])][this.hash(point[1])];
-    this.removeItemFromCell(item, list);
+    this.removeItemFromCell(id, list);
 }
 
 //removes item from cell, if it exists
 //index switching in order to garbage friendly, finns bara en jord
-Grid.prototype.removeItemFromCell = function(item, cell){
+Grid.prototype.removeItemFromCell = function(id, list){
     removed = false;
     for( var i = 0; i < list.length; i++){
         if(removed){
             list[i-1] = list[i];
         }
-        if(list[i].id === item.id){
+        if(list[i].id === id){
             removed = true;
         }
     }
@@ -33,26 +39,27 @@ Grid.prototype.removeItemFromCell = function(item, cell){
     }
 }
 
-Grid.prototype.insertBox = function(item, boundingBox){
+Grid.prototype.insertBox = function(rigidBody){
+    var boundingBox = rigidBody.box;
     var minX = this.hash(boundingBox.min[0]);
     var minY = this.hash(boundingBox.min[1]);
-    var maxX = this.hash(boundingBox.min[0]);
-    var maxY = this.hash(boundingBox.min[1]);
+    var maxX = this.hash(boundingBox.max[0]);
+    var maxY = this.hash(boundingBox.max[1]);
     for( var i = minX; i <= maxX; i++){
-        for(j = minY; j <= maxY; j++){
-            this.contents[i][j].push(item);
+        for( var j = minY; j <= maxY; j++){
+            this.contents[i][j].push(rigidBody);
         }
     }
 }
 
-Grid.prototype.removeBox = function(item, boundingBox){
+Grid.prototype.removeBox = function(id, boundingBox){
     var minX = this.hash(boundingBox.min[0]);
     var minY = this.hash(boundingBox.min[1]);
-    var maxX = this.hash(boundingBox.min[0]);
-    var maxY = this.hash(boundingBox.min[1]);
+    var maxX = this.hash(boundingBox.max[0]);
+    var maxY = this.hash(boundingBox.max[1]);
     for( var i = minX; i <= maxX; i++){
         for(j = minY; j <= maxY; j++){
-            removeItemFromCell(item, this.contents[i][j]);
+            this.removeItemFromCell(id, this.contents[i][j]);
         }
     }
 }

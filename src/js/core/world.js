@@ -1,9 +1,9 @@
-World = function (){
+World = function (sizeX, sizeY, gridSize){
     this.entities = new Array();
     this.movingObjects = [];
     this.playerEntity = {};
     this.camera = {};
-    this.grid = new Grid(sizeX, sizeY);
+    this.grid = new Grid(sizeX, sizeY, gridSize);
 };
 
 World.prototype.setEntities = function ( entitiesArray ) {
@@ -18,7 +18,7 @@ World.prototype.addEntity = function ( e ) {
     if(e.c.movement){
         this.movingObjects.add(e);
     } else if(e.c.rigidBody){
-        this.grid.insertBox(e, e.rigidBody.box);
+        this.grid.insertBox(e.rigidBody);
     }
     if(e.c.playerCharacter){
         this.playerEntity = e;
@@ -33,7 +33,7 @@ World.prototype.removeEntity = function ( e ) {
     if(e.c.movement){
         this.movingObjects.add(e);
     } else if(e.c.rigidBody){
-        this.grid.removeBox(e, e.rigidBody.box);
+        this.grid.removeBox(e.rigidBody);
     }
     if(e.c.playerCharacter){
         this.playerEntity = null;
