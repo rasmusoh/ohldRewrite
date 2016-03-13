@@ -1,4 +1,4 @@
-ShapeEnum = {
+SHAPE = {
     CIRCLE: 1,
     POLYGON: 2,
     EDGE: 3
@@ -9,11 +9,18 @@ ShapeEnum = {
 RigidBody = function(type, body){
     this.type = type;
     this.body = body;
+
+    //collision metadata
     this.haveCollided = false;
-    this.collisionVector = Vec2.create();
-    this.collisionPoint = Vec2.create();
+    this.collisionVector = Vec2.create(0,0);
+    this.collisionPoint = Vec2.create(0,0);
+    this.collisionEntity = 0;
+    
+    //if collisionbody is used as a trigger for something else
+    this.isTrigger = false; 
+
     this.box = new BoundingBox(0, 0, 0, 0);
-    if( this.type === ShapeEnum.EDGE ){
+    if( this.type === SHAPE.EDGE ){
         this.box.min[0] = Math.min(body.verteces[0][0], body.verteces[1][0]);
         this.box.min[1] = Math.min(body.verteces[0][1], body.verteces[1][1]);
         this.box.max[0] = Math.max(body.verteces[0][0], body.verteces[1][0]);
@@ -25,10 +32,10 @@ RigidBody = function(type, body){
 
 RigidBody.prototype.update = function(position, rotation){
     switch(this.type){
-        case ShapeEnum.CIRCLE:
+        case SHAPE.CIRCLE:
             Vec2.set(position, this.body.center);
             break;
-        case ShapeEnum.POLYGON:
+        case SHAPE.POLYGON:
             this.body.transform(position, rotation);
             break;
     }

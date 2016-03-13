@@ -13,6 +13,14 @@ World.prototype.setEntities = function ( entitiesArray ) {
     }
 };
 
+World.prototype.getEntity = function(id) {
+    for(i = 0; i < entitiesArray.length; i++){
+        if(entities[i].id === id){
+            return entities[i];
+        }
+    }
+}
+
 World.prototype.addEntity = function ( e ) {
     this.entities.add(e);
     if(e.c.movement){
@@ -29,9 +37,9 @@ World.prototype.addEntity = function ( e ) {
 };
 
 World.prototype.removeEntity = function ( e ) {
-    this.entities = entitiesArray;
+    ArrayHelper.removeById(e.id, this.entities);
     if(e.c.movement){
-        this.movingObjects.add(e);
+        ArrayHelper.removeById(e.id, this.movingObjects);
     } else if(e.c.rigidBody){
         this.grid.removeBox(e.rigidBody);
     }

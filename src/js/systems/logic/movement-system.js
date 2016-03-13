@@ -1,12 +1,25 @@
 MovementSystem = (function(){
 
-    var update = function(entities, playerEntity, delta){
-        var filtered = entities.filter( function(e) {return e.c.movement && e.c.position; });
-        for (e of filtered){
-            Vec2.addScaled(e.c.movement.velocity, e.c.movement.acc, delta);
-            Vec2.addScaled(e.c.position, e.c.movement.velocity, delta);
-            e.c.position.rotation += delta * e.c.velocity.angularVelocity;
-        };
+    var update = function(world, delta){
+        var moving = world.movingObjects;
+
+        for(i = 0; i < moving.length; i++){
+            iMoving = moving[i].c.movingBody;
+            
+            Vec2.addScaled(iMoving.velocity, iMoving.acceleration, delta);
+            Vec2.addScaled(iMoving.position, iMoving.velocity, delta);
+
+            iMoving.angularVelocity += delta * iMoving.tourque;
+            iMoving.rotation += delta * iMoving.angularVelocity;
+
+            //update collisionbody with latest position/rotation
+            moving[i].c.rigidBody.update(iMoving.position, iMoving.rotation);
+        }
+
+        //sort moving objects according to collision body position
+        moving.sort( function(a, b){
+            return a.c.rigidBody.box.min[0] - b.c.rigidBody.box.min[0];
+        });
     };
     
     return {

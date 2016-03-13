@@ -44,7 +44,7 @@ describe("Grid", function(){
     it("insertBox should insert bounding box in all overlapping cells", function(){
         this.testitem.box = new BoundingBox(811, 1101, 1095, 1205);
 
-        this.testGrid.insertBox(this.testitem);
+        this.testGrid.insertBox(this.testitem, this.testitem.box);
 
         expect(this.testGrid.contents[8][10].length).toEqual(0);
         expect(this.testGrid.contents[8][11].length).toEqual(1);
@@ -60,8 +60,8 @@ describe("Grid", function(){
         this.testitem.box = new BoundingBox(811, 1101, 1095, 1205);
         this.testitem2.box = new BoundingBox(811, 1101, 1095, 1205);
 
-        this.testGrid.insertBox(this.testitem);
-        this.testGrid.insertBox(this.testitem2);
+        this.testGrid.insertBox(this.testitem, this.testitem.box);
+        this.testGrid.insertBox(this.testitem2, this.testitem2.box);
 
         this.testGrid.removeBox(1, this.testitem.box);
 
@@ -78,8 +78,8 @@ describe("Grid", function(){
         this.testitem.box = new BoundingBox(811, 1101, 1095, 1205);
         this.testitem2.box = new BoundingBox(811, 1101, 1095, 1205);
 
-        this.testGrid.insertBox(this.testitem);
-        this.testGrid.insertBox(this.testitem2);
+        this.testGrid.insertBox(this.testitem, this.testitem.box);
+        this.testGrid.insertBox(this.testitem2, this.testitem2.box);
 
         this.testGrid.removeBox(3, this.testitem.box);
 

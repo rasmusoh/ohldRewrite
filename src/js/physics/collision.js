@@ -12,23 +12,23 @@ Collision.checkBoundingBox = function(A,B){
 Collision.checkBodies = function(A, B, out){
     var result;
     switch(B.type){
-        case ShapeEnum.CIRCLE:
-            if (A.type === ShapeEnum.CIRCLE){
+        case SHAPE.CIRCLE:
+            if (A.type === SHAPE.CIRCLE){
                 result = Collision.checkCircleCircle(A.body, B.body, A.collisionVector);
             } else {
                 result = Collision.checkPolygonCircle(A.body, B.body, A.collisionVector); 
             }
             break;
-        case ShapeEnum.POLYGON:
-            if (A.type === ShapeEnum.CIRCLE){
+        case SHAPE.POLYGON:
+            if (A.type === SHAPE.CIRCLE){
                 result = Collision.checkPolygonCircle(B.body, A.body, A.collisionVector); 
                 Vec2.scale(A.collisionVector, -1, A.collisionVector); //get passed in opposite order, so we need to flip collision vector
             } else {
                 result = Collision.checkPolygonPolygon(A.body, B.body, A.collisionVector); 
             }
             break;
-        case ShapeEnum.EDGE:
-            if (A.type === ShapeEnum.CIRCLE){
+        case SHAPE.EDGE:
+            if (A.type === SHAPE.CIRCLE){
                 result = Collision.checkCircleEdge(A.body, B.body, A.collisionVector);
             } else {
                 result = Collision.checkPolygonEdge(A.body, B.body, A.collisionVector); 

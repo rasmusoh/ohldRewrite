@@ -1,6 +1,6 @@
 describe("RigidBody", function(){ 
     it("update should update circles position", function(){
-        var rigidBody = new RigidBody(ShapeEnum.CIRCLE, CreateTestCircle());
+        var rigidBody = new RigidBody(SHAPE.CIRCLE, CreateTestCircle());
         var position = Vec2.create(100,100);
 
         rigidBody.update(position, 0);
@@ -9,7 +9,7 @@ describe("RigidBody", function(){
     });
 
     it("update should should update the bounding box (circle)", function(){
-        var rigidBody = new RigidBody(ShapeEnum.CIRCLE, CreateTestCircle());
+        var rigidBody = new RigidBody(SHAPE.CIRCLE, CreateTestCircle());
         var position = Vec2.create(100,100);
 
         rigidBody.update(position, 0);
@@ -26,7 +26,7 @@ describe("RigidBody", function(){
             [ 1,-1],
             [-1,-1]];
         var polygon = new Polygon(verteces);
-        var rigidBody = new RigidBody(ShapeEnum.POLYGON, polygon);
+        var rigidBody = new RigidBody(SHAPE.POLYGON, polygon);
         var translation = Vec2.create(5,6);
 
         rigidBody.update(translation, 0);
@@ -48,7 +48,7 @@ describe("RigidBody", function(){
             [ 1,-1],
             [-1,-1]];
         var polygon = new Polygon(verteces);
-        var rigidBody = new RigidBody(ShapeEnum.POLYGON, polygon);
+        var rigidBody = new RigidBody(SHAPE.POLYGON, polygon);
         var translation = Vec2.create(5,6);
 
         rigidBody.update(translation, 0);
@@ -58,7 +58,7 @@ describe("RigidBody", function(){
     });
 
     it("constructor should create and set bounding box", function(){
-        var rigidBody = new RigidBody(ShapeEnum.EDGE, CreateTestEdge());
+        var rigidBody = new RigidBody(SHAPE.EDGE, CreateTestEdge());
 
         expectVec2Equals(rigidBody.box.min, 0, 0);
         expectVec2Equals(rigidBody.box.max, 200, 200);

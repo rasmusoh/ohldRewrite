@@ -38,8 +38,8 @@ describe("checkBoundingBox", function(){
 
 describe("checkBodies", function(){ 
     it("should return set collisionvector of rigidbody when colliding 1", function(){
-        var a = new RigidBody(ShapeEnum.POLYGON, CreateTestPolygonPentagon(0, -10));
-        var b = new RigidBody(ShapeEnum.POLYGON, CreateTestPolygonTriangle(130, 40));
+        var a = new RigidBody(SHAPE.POLYGON, CreateTestPolygonPentagon(0, -10));
+        var b = new RigidBody(SHAPE.POLYGON, CreateTestPolygonTriangle(130, 40));
 
         var result = Collision.checkBodies(a,b);
 
@@ -48,8 +48,8 @@ describe("checkBodies", function(){
     });
 
     it("should return set collisionvector of rigidbody when colliding 2", function(){
-        var a = new RigidBody(ShapeEnum.POLYGON, CreateTestPolygonPentagon(-110,230));
-        var b = new RigidBody(ShapeEnum.EDGE, CreateTestEdgeUpsideDown());
+        var a = new RigidBody(SHAPE.POLYGON, CreateTestPolygonPentagon(-110,230));
+        var b = new RigidBody(SHAPE.EDGE, CreateTestEdgeUpsideDown());
 
         var result = Collision.checkBodies(a,b);
 
@@ -58,8 +58,8 @@ describe("checkBodies", function(){
     });
 
     it("should return set collisionvector of rigidbody when colliding 3(flip collision vector)", function(){
-        var a = new RigidBody(ShapeEnum.CIRCLE, CreateTestCircle(-180, 0));
-        var b = new RigidBody(ShapeEnum.POLYGON, CreateTestPolygonPentagon(-10, 0));
+        var a = new RigidBody(SHAPE.CIRCLE, CreateTestCircle(-180, 0));
+        var b = new RigidBody(SHAPE.POLYGON, CreateTestPolygonPentagon(-10, 0));
 
         var result = Collision.checkBodies(a,b);
 
@@ -68,8 +68,8 @@ describe("checkBodies", function(){
     });
 
     it("should return false when not colliding", function(){
-        var a = new RigidBody(ShapeEnum.CIRCLE, CreateTestCircle(-280, 0));
-        var b = new RigidBody(ShapeEnum.POLYGON, CreateTestPolygonPentagon(-10, 0));
+        var a = new RigidBody(SHAPE.CIRCLE, CreateTestCircle(-280, 0));
+        var b = new RigidBody(SHAPE.POLYGON, CreateTestPolygonPentagon(-10, 0));
 
         var result = Collision.checkBodies(a,b);
 
