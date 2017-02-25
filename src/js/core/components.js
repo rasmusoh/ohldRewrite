@@ -15,7 +15,7 @@ positionComponent.prototype.name = "position";
 
 aiStateComponent = function(acceleration, topspeed){
     //this.acceleration = acceleration;
-    //this.topspeed = topspeed;
+
     //let these be global for now
 };
 aiStateComponent.prototype.name = "ai";

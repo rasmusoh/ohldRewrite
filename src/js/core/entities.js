@@ -11,6 +11,7 @@ Entity = function(){
 Entity.prototype.count = 0;
 
 Entity.prototype.addComponent = function addComponent ( component ){
+    component.id = this.id;
 	this.c[component.name] = component;
 	return this;
 };

@@ -9,6 +9,10 @@ Grid = function(sizeX, sizeY, cellSize){
     }
 }
 
+Grid.prototype.getContents = function(i, j) {
+    return this.contents[i][j];
+}
+
 Grid.prototype.hash = function(coord){
     return Math.floor(coord/this.cellSize);
 }
@@ -22,26 +26,28 @@ Grid.prototype.removePoint = function(id, point){
     ArrayHelper.removeById(id, list);
 }
 
-Grid.prototype.insertBox = function(item, boundingBox){
+Grid.prototype.insertBox = function(rigidBody){
+    var boundingBox = rigidBody.box;
     var minX = this.hash(boundingBox.min[0]);
     var minY = this.hash(boundingBox.min[1]);
     var maxX = this.hash(boundingBox.max[0]);
     var maxY = this.hash(boundingBox.max[1]);
     for( var i = minX; i <= maxX; i++){
         for( var j = minY; j <= maxY; j++){
-            this.contents[i][j].push(item);
+            this.contents[i][j].push(rigidBody);
         }
     }
 }
 
-Grid.prototype.removeBox = function(id, boundingBox){
+Grid.prototype.removeBox = function(rigidBody){
+    var boundingBox = rigidBody.box;
     var minX = this.hash(boundingBox.min[0]);
     var minY = this.hash(boundingBox.min[1]);
     var maxX = this.hash(boundingBox.max[0]);
     var maxY = this.hash(boundingBox.max[1]);
     for( var i = minX; i <= maxX; i++){
         for(j = minY; j <= maxY; j++){
-            ArrayHelper.removeById(id, this.contents[i][j]);
+            ArrayHelper.removeById(rigidBody.id, this.contents[i][j]);
         }
     }
 }

@@ -3,14 +3,14 @@ CollisionSystem = (function(){
     collisionVector = Vec2.create();
 
     update = function(world, delta){
-        var moving = world.movingObjects;
+        var moving = world.movingRigidBodies;
 
-        for(i = 0; i < moving.length; i++){
-            var iBody = moving[i].c.rigidBody;
+        for(var i = 0; i < moving.length; i++){
+            var iBody = moving[i];
 
             //check against moving bodies (sort and sweep)
-            for(j = i + 1; j < moving.length; j++){
-                var jBody = moving[j].c.rigidBody;
+            for(var j = i + 1; j < moving.length; j++){
+                var jBody = moving[j];
 
                 if(iBody.box.max[0] <= jBody.box.min[0]){
                     break;
@@ -25,13 +25,18 @@ CollisionSystem = (function(){
 
             //check against static bodies (spatial hash)
             world.grid.getCellsBox(iBody.box, cellsBox);
-            for(i = cellsBox.min[0]; i <= cellsBox.max[0]; i++){
-                for(j = cellsBox.min[1]; j <= cellsBox.max[1]; j++){
-                    for(item of world.grid.contents[i][j]){
-                        if(Collision.checkBoundingBox(iBody.box, item)){
-                            result = Collision.checkBodyStatic(iBody, item);
-                            if(result) {
-                                iBody.collisionEntity = moving[j].id;
+
+            for(var k = cellsBox.min[0]; i <= cellsBox.max[0]; i++){
+
+                for(var l = cellsBox.min[1]; j <= cellsBox.max[1]; j++){
+
+                    for(item of world.grid.getContents(k, l)){
+
+                        if(Collision.checkBoundingBox(iBody.box, item.box)){
+
+                            iBody.haveCollided = Collision.checkBodies(iBody, item);
+                            if(iBody.haveCollided) {
+                                iBody.collisionEntity = item.id;
                             }
                         }
                     }

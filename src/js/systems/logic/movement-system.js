@@ -1,10 +1,10 @@
 MovementSystem = (function(){
 
     var update = function(world, delta){
-        var moving = world.movingObjects;
+        var moving = world.movingBodies;
 
         for(i = 0; i < moving.length; i++){
-            iMoving = moving[i].c.movingBody;
+            iMoving = moving[i];
             
             Vec2.addScaled(iMoving.velocity, iMoving.acceleration, delta);
             Vec2.addScaled(iMoving.position, iMoving.velocity, delta);

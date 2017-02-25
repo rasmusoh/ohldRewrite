@@ -4,9 +4,11 @@ SHAPE = {
     EDGE: 3
 };
 
+
 //object that holds a body (circle, polygon or edge), its axis-aligned bounding box
 //collision flag and collision vector
 RigidBody = function(type, body){
+    this.id = -1;
     this.type = type;
     this.body = body;
 
@@ -29,6 +31,8 @@ RigidBody = function(type, body){
         this.updateBox();
     }
 }
+
+RigidBody.prototype.name = 'rigidBody';
 
 RigidBody.prototype.update = function(position, rotation){
     switch(this.type){

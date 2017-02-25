@@ -3,7 +3,7 @@ CollisionHandlingSystem = (function(){
     collisionVector = Vec2.create();
 
     update = function(world, delta){
-        var moving = world.movingObjects;
+        var moving = world.movingBodies;
 
         for(var i = 0; i < moving.length; i++){
             var body = moving[i].c.rigidBody;

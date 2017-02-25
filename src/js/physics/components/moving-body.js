@@ -1,7 +1,8 @@
 MovingBody = function(){
+    this.id;
     this.mass = 0;
     this.position = Vec2.create(0, 0);
-    this.rotation = 0 ;
+    this.rotation = 0;
     this.velocity = Vec2.create(0, 0);
     this.angularVelocity = 0;
     this.acceleration = Vec2.create(0, 0);
@@ -9,3 +10,4 @@ MovingBody = function(){
     this.friction = 0;
 }
 
+MovingBody.prototype.name = 'movingBody';
