@@ -1,12 +1,8 @@
 CameraSystem = (function(){
     var cam;
 
-    update = function(entities, playerEntity, delta){
-        for( var i = entities.length-1; i>=0; i--){
-            if (entities[i].c.camera){
-                cam = entities[i].c.camera;
-            };
-        };
+    update = function(world, delta){
+        var cam = world.camera;
         cam.x = playerEntity.c.position.x + CAMERA_OFFSET_X;
         cam.y = playerEntity.c.position.y + CAMERA_OFFSET_Y;
         cam.scale = 1;

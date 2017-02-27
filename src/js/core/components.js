@@ -5,12 +5,11 @@ velocityComponent = function(velocityX, velocityY, angularVelocity){
 };
 velocityComponent.prototype.name = "velocity";
 
-positionComponent = function(x,y,rotation) {
-    this.x = x || 0;
-    this.y = y || 0;
+PositionComponent = function(x,y,rotation) {
+    this.translation = Vec2.create(x,y);
     this.rotation = rotation || 0;
 };
-positionComponent.prototype.name = "position";
+PositionComponent.prototype.name = "position";
 
 
 aiStateComponent = function(acceleration, topspeed){
@@ -25,15 +24,22 @@ rocketComponent = function(beginningState){
 };
 rocketComponent.prototype.name = "rocket";
 
-cameraComponent = function(x, y, scale, rotation){
+CameraComponent = function(x, y, scale, rotation){
     this.x = x || 0;
     this.y = y || 0;
     this.scale = scale || 1;
     this.rotation = rotation || 0;
 };
-cameraComponent.prototype.name = "camera";
+CameraComponent.prototype.name = "camera";
 
-appearanceComponent = function(color){
-    this.color = color;
+
+AppearanceComponent = function(color){
+    this.defaultColor = color;
+    this.color = color; //current color
 };
-appearanceComponent.prototype.name = "appearance";
+AppearanceComponent.prototype.name = "appearance";
+
+DraggableComponent = function() {
+    this.isDragged = false;
+}
+DraggableComponent.prototype.name = "draggable";

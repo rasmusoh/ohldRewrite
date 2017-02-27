@@ -9,29 +9,36 @@ Collision.checkBoundingBox = function(A,B){
         && A.min[1] < B.max[1] && B.min[1] < A.max[1];
 }
 
-Collision.checkBodies = function(A, B, out){
+Collision.boundingBoxPoint = function(box, point) {
+    return box.max[0] >= point[0] &&
+           box.min[0] <= point[0] &&
+           box.max[1] >= point[1] &&
+           box.min[1] <= point[1] 
+}
+
+Collision.checkBodies = function(A, B, collisionVector){
     var result;
     switch(B.type){
         case SHAPE.CIRCLE:
             if (A.type === SHAPE.CIRCLE){
-                result = Collision.checkCircleCircle(A.body, B.body, A.collisionVector);
+                result = Collision.checkCircleCircle(A.body, B.body, collisionVector);
             } else {
-                result = Collision.checkPolygonCircle(A.body, B.body, A.collisionVector); 
+                result = Collision.checkPolygonCircle(A.body, B.body, collisionVector); 
             }
             break;
         case SHAPE.POLYGON:
             if (A.type === SHAPE.CIRCLE){
-                result = Collision.checkPolygonCircle(B.body, A.body, A.collisionVector); 
-                Vec2.scale(A.collisionVector, -1, A.collisionVector); //get passed in opposite order, so we need to flip collision vector
+                result = Collision.checkPolygonCircle(B.body, A.body, collisionVector); 
+                Vec2.scale(collisionVector, -1, collisionVector); //get passed in opposite order, so we need to flip collision vector
             } else {
-                result = Collision.checkPolygonPolygon(A.body, B.body, A.collisionVector); 
+                result = Collision.checkPolygonPolygon(A.body, B.body, collisionVector); 
             }
             break;
         case SHAPE.EDGE:
             if (A.type === SHAPE.CIRCLE){
-                result = Collision.checkCircleEdge(A.body, B.body, A.collisionVector);
+                result = Collision.checkCircleEdge(A.body, B.body, collisionVector);
             } else {
-                result = Collision.checkPolygonEdge(A.body, B.body, A.collisionVector); 
+                result = Collision.checkPolygonEdge(A.body, B.body, collisionVector); 
             }
             break;
     }

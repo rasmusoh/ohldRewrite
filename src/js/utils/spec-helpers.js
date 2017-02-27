@@ -52,3 +52,10 @@ CreateTestCircleBig = function(x, y){
     return new Circle(100, x, y);
 }
 
+CreateTestEdge = function(){
+    return new Edge(0,0,200,200, false);
+}
+
+CreateTestEdgeUpsideDown = function(){
+    return new Edge(0,200,200,0, true);
+}

@@ -1,12 +1,12 @@
 DebugGridSystem = (function(){
 
     var update = function(world, delta){
-        var cam = world.cameraEntity;
+        var cam = world.camera.c.camera;
         var lineSpacing = world.grid.cellSize;
 
         var canvas = document.getElementById("gameCanvas");
         var ctx = canvas.getContext('2d');
-        var ctx.strokeStyle = "#888888";
+        ctx.strokeStyle = "#888888";
         var xOffset = cam.x - cam.x % lineSpacing;
         var yOffset = cam.y - cam.y % lineSpacing;
         var noLinesX = Math.round(canvas.width / lineSpacing) + 2 ;

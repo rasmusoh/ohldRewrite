@@ -15,12 +15,16 @@ var Application = (function(){
         currentState.handleKeyPress(e);
     };
 
-    var handleMouseDown = function(){
-        currentState.handleMouseDown();
+    var handleMouseDown = function(e){
+        currentState.handleMouseDown(e);
     };
 
-    var handleMouseUp = function(){
-        currentState.handleMouseUp();
+    var handleMouseUp = function(e){
+        currentState.handleMouseUp(e);
+    };
+
+    var handleMouseMove = function(e){
+        currentState.handleMouseMove(e);
     };
 
     var frame = function(){
@@ -38,6 +42,7 @@ var Application = (function(){
         document.onkeypress = handleKeyPress;
         document.onmousedown = handleMouseDown;
         document.onmouseup = handleMouseUp;
+        document.onmousemove = handleMouseMove;
 
         switch(arg){
             case "testLevel":

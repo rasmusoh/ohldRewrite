@@ -12,15 +12,6 @@ RigidBody = function(type, body){
     this.type = type;
     this.body = body;
 
-    //collision metadata
-    this.haveCollided = false;
-    this.collisionVector = Vec2.create(0,0);
-    this.collisionPoint = Vec2.create(0,0);
-    this.collisionEntity = 0;
-    
-    //if collisionbody is used as a trigger for something else
-    this.isTrigger = false; 
-
     this.box = new BoundingBox(0, 0, 0, 0);
     if( this.type === SHAPE.EDGE ){
         this.box.min[0] = Math.min(body.verteces[0][0], body.verteces[1][0]);
@@ -55,3 +46,4 @@ RigidBody.prototype.updateBox = function(){
     this.box.min[1] = this.body.proj[0];
     this.box.max[1] = this.body.proj[1];
 }
+

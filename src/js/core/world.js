@@ -1,8 +1,9 @@
 World = function (sizeX, sizeY, gridSize){
     this.entities = [];
-    this.movingRigidBodies = [];
-    this.movingBodies = [];
-    this.playerEntity = {};
+    this.moving = [];
+    this.collisions = [];
+    this.inputQueue = [];
+    this.player = {};
     this.camera = {};
     this.grid = new Grid(sizeX, sizeY, gridSize);
 };
@@ -30,34 +31,31 @@ World.prototype.addEntities = function ( eArray ) {
 
 World.prototype.addEntity = function ( e ) {
     this.entities.push(e);
-    if(e.c.movingBody){
-        this.movingBodies.push(e.c.movingBody);
-        if(e.c.rigidBody){
-            this.movingRigidBodies.push(e.c.rigidBody);
-        }
-    } else if(e.c.rigidBody){
-        this.grid.insertBox(e.c.rigidBody);
+
+    if(e.c.movingBody) {
+        this.moving.push(e);
+    } else if (e.c.rigidBody) {
+        this.grid.insertBody(e);
     }
+    
     if(e.c.player){
-        this.playerEntity = e;
+        this.player = e;
     }
     if(e.c.camera){
         this.camera = e;
     }
+
 };
 
 World.prototype.removeEntity = function ( e ) {
     ArrayHelper.removeById(e.id, this.entities);
     if(e.c.movingBody){
-        ArrayHelper.removeById(e.id, this.movingBodies);
-        if(e.c.rigidBody) {
-            ArrayHelper.removeById(e.id, this.movingRigidBodies);
-        }
+        ArrayHelper.removeById(e.id, this.moving);
     } else if(e.c.rigidBody){
-        this.grid.removeBox(e.c.rigidBody);
+        this.grid.removeBody(e);
     }
     if(e.c.player){
-        this.playerEntity = null;
+        this.player = null;
     }
     if(e.c.camera){
 

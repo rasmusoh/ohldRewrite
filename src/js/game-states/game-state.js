@@ -1,36 +1,28 @@
 INPUT = Object.freeze({
     "NONE":1,
     "UP":2,
-    "DOWN":3});
+    "DOWN":3,
+    "MOUSEMOVE":4});
 
 var GameState = (function(){
-    var entities,
-    playerEntity,
+    var world,
     queuedPause,
-    queuedInput,
     systems,
     renderSystem;
 
     var init = function(){
-        entities = Levels.loadTestLevel();
-        for(e of entities){
-            if(e.c.rocket){
-                playerEntity = e;
-            }
-        }
+        world = Levels.CollisionTest1();
 
         systems = [
-            RocketSystem,
-            AiSystem,
+            MouseDragSystem,
             MovementSystem,
             CollisionSystem,
+            CollisionHandlingDebugSystem
         ];
 
         renderSystems = [
-            CameraSystem,
             DebugGridSystem,
-            RenderSystem,
-            DebugInfoSystem
+            DebugPhysicsRenderSystem,
         ];
     };
 
@@ -47,20 +39,16 @@ var GameState = (function(){
 
     //don't change state immediately, might lead to state changes mid update which may introduce bugs
     //instead queue input and handle att beginning of each frame
-    var handleMouseDown = function(){
-        queuedInput = INPUT.DOWN;
+    var handleMouseDown = function(e){
+        world.inputQueue.push({ type: INPUT.DOWN, position: Vec2.create(e.clientX,  e.clientY) });
     };
 
-    var handleMouseUp = function(){
-        queuedInput = INPUT.UP;
+    var handleMouseUp = function(e){
+        world.inputQueue.push({ type: INPUT.UP, position: Vec2.create(e.clientX,  e.clientY) });
     };
 
-    var handleInput = function(){
-        if(queuedInput === INPUT.DOWN && playerEntity.c.rocket.state === ROCKET_STATE.FREEFALL){
-            playerEntity.c.rocket.state = ROCKET_STATE.ROCKETUP;
-        }else if(queuedInput === INPUT.UP && playerEntity.c.rocket.state === ROCKET_STATE.ROCKETUP){
-            playerEntity.c.rocket.state = ROCKET_STATE.FREEFALL;
-        };
+    var handleMouseMove = function(e){
+        world.inputQueue.push({ type: INPUT.MOUSEMOVE, position: Vec2.create(e.movementX,  e.movementY) });
     };
 
     var update = function(delta) {
@@ -68,22 +56,16 @@ var GameState = (function(){
             return PauseState.gotoThis.state();
         }
 
-        mainGameLoop(delta);
+        for(system of systems){
+            system.update(world, delta); 
+        }
 
         return this;
     };
 
-    var mainGameLoop = function(delta) {
-        handleInput();
-        for(system of systems){
-            system.update(entities, playerEntity, delta); 
-        }
-
-    };
-
     var render = function(delta){
         for (system of renderSystems){
-            system.update(entities, playerEntity, delta);
+            system.update(world, delta);
         }
     };
 
@@ -96,6 +78,8 @@ var GameState = (function(){
 
         handleKeyPress: handleKeyPress,
 
+        handleMouseMove: handleMouseMove,
+
         handleMouseUp: handleMouseUp,
 
         update: update,
@@ -103,3 +87,4 @@ var GameState = (function(){
         render : render
     };
 })();
+

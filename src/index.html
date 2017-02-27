@@ -3,8 +3,7 @@
     <head>
         <title>OhLD 2.0</title>
     </head>
-    <body>
-        <canvas id ="gameCanvas" width="800" height="450">
+    <body onresize="resize_canvas()"> <canvas id ="gameCanvas" width="800" height="450">
         </canvas>
         <div ui-view> test </div>
 
@@ -20,14 +19,17 @@
         <script src="js/physics/components/moving-body.js"></script>
         <script src="js/physics/line.js"></script>
         <script src="js/physics/grid.js"></script>
+        <script src="js/physics/manifold.js"></script>
         <script src="js/physics/dynamics.js"></script>
         <script src="js/physics/collision.js"></script>
         <script src="js/systems/logic/collision-system.js"></script>
+        <script src="js/systems/logic/collision-handling-debug-system.js"></script>
+        <script src="js/systems/logic/mouse-drag-system.js"></script>
         <script src="js/systems/logic/rocket-system.js"></script>
         <script src="js/systems/logic/ai-system.js"></script>
         <script src="js/systems/logic/movement-system.js"></script>
         <script src="js/systems/graphics/camera-system.js"></script>
-        <script src="js/systems/graphics/render-system.js"></script>
+        <script src="js/systems/graphics/debug-physics-render-system.js"></script>
         <script src="js/systems/graphics/debug-info-system.js"></script>
         <script src="js/systems/graphics/debug-grid-system.js"></script>
         <script src="js/game-states/design-state.js"></script>
@@ -36,10 +38,27 @@
         <script src="js/game-states/game-state.js"></script>
         <script src="js/constants.js"></script>
         <script src="js/utils/keycodes.js"></script>
+        <script src="js/utils/spec-helpers.js"></script>
+        <script src="js/utils/array-helper.js"></script>
         <script src="js/level-manager.js"></script>
         <script src="js/app.js"></script>
         <script>
-            Application.startGame("testLevel");
+            Application.startGame("testLevel")        
+            
+            function resize_canvas(){
+                canvas = document.getElementById("gameCanvas");
+                if (canvas.width  < window.innerWidth)
+                {
+                    canvas.width  = window.innerWidth;
+                }
+
+                if (canvas.height < window.innerHeight)
+                {
+                    canvas.height = window.innerHeight;
+                }
+            };
+            
+            resize_canvas();
         </script>
     </body>
 </html>

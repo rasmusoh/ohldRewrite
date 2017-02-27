@@ -1,23 +1,23 @@
 MovementSystem = (function(){
 
     var update = function(world, delta){
-        var moving = world.movingBodies;
 
-        for(i = 0; i < moving.length; i++){
-            iMoving = moving[i];
+        for(var i = 0; i < world.moving.length; i++){
+            iMoving = world.moving[i];
             
-            Vec2.addScaled(iMoving.velocity, iMoving.acceleration, delta);
-            Vec2.addScaled(iMoving.position, iMoving.velocity, delta);
+            Vec2.addTransformed(iMoving.c.movingBody.velocity, iMoving.c.movingBody.acceleration, 0, delta);
+            Vec2.addTransformed(iMoving.c.position.translation, iMoving.c.movingBody.velocity, 0, delta);
 
-            iMoving.angularVelocity += delta * iMoving.tourque;
-            iMoving.rotation += delta * iMoving.angularVelocity;
+            iMoving.c.movingBody.angularVelocity += delta * iMoving.c.movingBody.tourque;
+            iMoving.c.position.rotation += delta * iMoving.c.movingBody.angularVelocity;
 
-            //update collisionbody with latest position/rotation
-            moving[i].c.rigidBody.update(iMoving.position, iMoving.rotation);
+            if (iMoving.c.rigidBody) {
+                iMoving.c.rigidBody.update(iMoving.c.position.translation, iMoving.c.position.rotation);
+            }
         }
 
         //sort moving objects according to collision body position
-        moving.sort( function(a, b){
+        world.moving.sort( function(a, b){
             return a.c.rigidBody.box.min[0] - b.c.rigidBody.box.min[0];
         });
     };

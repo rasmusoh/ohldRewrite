@@ -26,28 +26,28 @@ Grid.prototype.removePoint = function(id, point){
     ArrayHelper.removeById(id, list);
 }
 
-Grid.prototype.insertBox = function(rigidBody){
-    var boundingBox = rigidBody.box;
+Grid.prototype.insertBody = function(entity){
+    var boundingBox = entity.c.rigidBody.box;
     var minX = this.hash(boundingBox.min[0]);
     var minY = this.hash(boundingBox.min[1]);
     var maxX = this.hash(boundingBox.max[0]);
     var maxY = this.hash(boundingBox.max[1]);
     for( var i = minX; i <= maxX; i++){
         for( var j = minY; j <= maxY; j++){
-            this.contents[i][j].push(rigidBody);
+            this.contents[i][j].push(entity);
         }
     }
 }
 
-Grid.prototype.removeBox = function(rigidBody){
-    var boundingBox = rigidBody.box;
+Grid.prototype.removeBody = function(entity){
+    var boundingBox = entity.c.rigidBody.box;
     var minX = this.hash(boundingBox.min[0]);
     var minY = this.hash(boundingBox.min[1]);
     var maxX = this.hash(boundingBox.max[0]);
     var maxY = this.hash(boundingBox.max[1]);
     for( var i = minX; i <= maxX; i++){
         for(j = minY; j <= maxY; j++){
-            ArrayHelper.removeById(rigidBody.id, this.contents[i][j]);
+            ArrayHelper.removeById(entity, this.contents[i][j]);
         }
     }
 }
